@@ -16,10 +16,15 @@ apt update
 apt -y upgrade
 apt install -y vim git
 
+git config --global user.name takashiki
+git config --global user.email 857995137@qq.com
+git config --global credential.helper store
+
 # ===
 # config vim
 
 git clone https://github.com/takashiki/my-vim.git ~/.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo "source ~/.vim/my.vim" > ~/.vimrc
 
 # ===
@@ -44,7 +49,7 @@ source /etc/os-release
 
 apt remove docker docker-engine docker.io containerd runc
 
-apt install \
+apt install -y \
 	apt-transport-https \
 	ca-certificates \
 	curl \
@@ -60,7 +65,7 @@ add-apt-repository \
 	stable"
 
 apt update
-apt install docker-ce docker-ce-cli containerd.io
+apt install -y docker-ce docker-ce-cli containerd.io
 
 docker run hello-wolrd
 
