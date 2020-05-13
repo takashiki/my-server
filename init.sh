@@ -13,8 +13,8 @@ export $(cat .env | sed 's/#.*//g' | xargs)
 # install softwares
 
 apt update
-apt upgrade
-apt install vim git
+apt -y upgrade
+apt install -y vim git
 
 # ===
 # config vim
