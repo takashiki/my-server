@@ -65,7 +65,7 @@ add-apt-repository \
 	stable"
 
 apt update
-apt install -y docker-ce docker-ce-cli containerd.io
+apt install -y docker-ce docker-ce-cli containerd.io docker-compose
 
 docker run hello-wolrd
 
