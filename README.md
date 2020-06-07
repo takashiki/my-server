@@ -4,9 +4,12 @@
 
 ## Usage
 
-create .env file
-
 ```shell
+
+# Optional: create .env file
+curl https://raw.githubusercontent.com/takashiki/my-server/master/.env.example .env | sh
+
+# Run with root privileges
 curl https://raw.githubusercontent.com/takashiki/my-server/master/init.sh | sh
 
 # OR

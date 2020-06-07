@@ -9,11 +9,13 @@ fi
 # install softwares
 
 apt update
-apt -yqq upgrade
+apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
 apt install -y vim git
 
-git config --global user.name takashiki
-git config --global user.email 857995137@qq.com
+if [ -z $GIT_USER ] && [ -z $GIT_EMAIL ]; then
+	git config --global user.name takashiki
+	git config --global user.email 857995137@qq.com
+fi
 git config --global credential.helper store
 
 # ===
