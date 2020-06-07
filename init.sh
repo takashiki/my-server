@@ -36,13 +36,15 @@ echo "source ~/.vim/my.vim" > ~/.vimrc
 
 echo "Port $SSH_PORT" >> /etc/ssh/sshd_config
 
-if [ ! -d ~/.ssh ]
-then
+if [ ! -d ~/.ssh ]; then
 	mkdir ~/.ssh
 	chmod 700 ~/.ssh
 fi
-cat $PUB_KEY >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
+
+if [ ! -z $PUB_KEY ] && [ -f $PUB_KEY ]; then
+	cat $PUB_KEY >> ~/.ssh/authorized_keys
+	chmod 600 ~/.ssh/authorized_keys
+fi
 
 service ssh restart
 
