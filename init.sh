@@ -2,13 +2,9 @@
 
 # load config
 
-if [ ! -f .env ]
-then
-	echo "must set config"
-	exit
+if [ -f .env ]; then
+	export $(cat .env | sed 's/#.*//g' | xargs)
 fi
-
-export $(cat .env | sed 's/#.*//g' | xargs)
 
 # install softwares
 
@@ -34,7 +30,9 @@ echo "source ~/.vim/my.vim" > ~/.vimrc
 # ===
 # config ssh port and key
 
-echo "Port $SSH_PORT" >> /etc/ssh/sshd_config
+if [ ! -z $SSH_PORT ]; then
+	echo "Port $SSH_PORT" >> /etc/ssh/sshd_config
+fi
 
 if [ ! -d ~/.ssh ]; then
 	mkdir ~/.ssh
