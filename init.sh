@@ -53,7 +53,7 @@ service ssh restart
 # ===
 # install docker
 
-export $(cat /etc/os-release | sed 's/#.*//g' | xargs)
+export $(cat /etc/os-release | grep ID | xargs)
 
 apt remove docker docker-engine docker.io containerd runc
 
