@@ -13,7 +13,7 @@ export $(cat .env | sed 's/#.*//g' | xargs)
 # install softwares
 
 apt update
-apt -y upgrade
+apt -yqq upgrade
 apt install -y vim git
 
 git config --global user.name takashiki
@@ -24,7 +24,7 @@ git config --global credential.helper store
 # basic config & vim
 git clone https://github.com/takashiki/my-server.git ~/.server
 echo "for alias in ~/.server/aliases/*
-	do . $alias
+	do . \$alias
 done" >> ~/.bashrc
 
 git clone https://github.com/takashiki/my-vim.git ~/.vim
@@ -51,7 +51,7 @@ service ssh restart
 # ===
 # install docker
 
-source /etc/os-release
+export $(cat /etc/os-release | sed 's/#.*//g' | xargs)
 
 apt remove docker docker-engine docker.io containerd runc
 
