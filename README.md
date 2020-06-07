@@ -7,7 +7,7 @@
 ```shell
 
 # Optional: create .env file
-curl https://raw.githubusercontent.com/takashiki/my-server/master/.env.example .env | sh
+curl https://raw.githubusercontent.com/takashiki/my-server/master/.env.example -o .env
 
 # Run with root privileges
 curl https://raw.githubusercontent.com/takashiki/my-server/master/init.sh | sh

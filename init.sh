@@ -8,6 +8,7 @@ fi
 
 # install softwares
 
+export DEBIAN_FRONTEND=noninteractive
 apt update
 apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
 apt install -y vim git
@@ -20,6 +21,7 @@ git config --global credential.helper store
 
 # ===
 # basic config & vim
+
 git clone https://github.com/takashiki/my-server.git ~/.server
 echo "for alias in ~/.server/aliases/*
 	do . \$alias
