@@ -21,7 +21,11 @@ git config --global user.email 857995137@qq.com
 git config --global credential.helper store
 
 # ===
-# config vim
+# basic config & vim
+git clone https://github.com/takashiki/my-server.git ~/.server
+echo "for alias in ~/.server/aliases/*
+	do . $alias
+done" >> ~/.bashrc
 
 git clone https://github.com/takashiki/my-vim.git ~/.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -68,4 +72,3 @@ apt update
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose
 
 docker run hello-wolrd
-
