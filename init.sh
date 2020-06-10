@@ -11,7 +11,7 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 apt update
 apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
-apt install -y vim git
+apt install -y vim git htop lrzsz autojump
 
 if [ -z $GIT_USER ] && [ -z $GIT_EMAIL ]; then
 	git config --global user.name takashiki
@@ -74,5 +74,10 @@ add-apt-repository \
 
 apt update
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose
+
+if [ ! -z $DOCKER_MIRROR ]; then
+	curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s $DOCKER_MIRROR
+	service docker restart
+fi
 
 docker run hello-wolrd
