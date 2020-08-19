@@ -80,4 +80,4 @@ if [ ! -z $DOCKER_MIRROR ]; then
 	service docker restart
 fi
 
-docker run hello-wolrd
+docker run hello-world
