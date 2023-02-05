@@ -3,7 +3,7 @@
 # load config
 
 if [ -f .env ]; then
-	export $(cat .env | sed 's/#.*//g' | xargs)
+	source .env
 fi
 
 # install softwares
