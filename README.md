@@ -10,8 +10,8 @@
 curl https://raw.fastgit.org/takashiki/my-server/master/.env.example -o .env
 
 # Run with root privileges
-curl https://raw.fastgit.org/takashiki/my-server/master/init.sh | sh
+curl https://raw.fastgit.org/takashiki/my-server/master/init.sh | bash
 
 # OR
-# wget -O - https://raw.fastgit.org/takashiki/my-server/master/init.sh | sh
+# wget -O - https://raw.fastgit.org/takashiki/my-server/master/init.sh | bash
 ```

@@ -22,13 +22,13 @@ git config --global credential.helper store
 # ===
 # basic config & vim
 
-git clone https://github.com/takashiki/my-server.git ~/.server
+git clone https://hub.fastgit.xyz/takashiki/my-server.git ~/.server
 echo "for alias in ~/.server/aliases/*
 	do . \$alias
 done" >> ~/.bashrc
 
-git clone https://github.com/takashiki/my-vim.git ~/.vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+git clone https://hub.fastgit.xyz/takashiki/my-vim.git ~/.vim
+git clone https://hub.fastgit.xyz/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo "source ~/.vim/my.vim" > ~/.vimrc
 
 # ===
