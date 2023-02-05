@@ -14,8 +14,8 @@ apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold
 apt install -y vim git htop lrzsz autojump
 
 if [ -z $GIT_USER ] && [ -z $GIT_EMAIL ]; then
-	git config --global user.name takashiki
-	git config --global user.email 857995137@qq.com
+	git config --global user.name $GIT_USER
+	git config --global user.email $GIT_EMAIL
 fi
 git config --global credential.helper store
 
