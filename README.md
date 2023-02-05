@@ -7,11 +7,11 @@
 ```shell
 
 # Optional: create .env file
-curl https://raw.githubusercontent.com/takashiki/my-server/master/.env.example -o .env
+curl https://raw.fastgit.org/takashiki/my-server/master/.env.example -o .env
 
 # Run with root privileges
-curl https://raw.githubusercontent.com/takashiki/my-server/master/init.sh | sh
+curl https://raw.fastgit.org/takashiki/my-server/master/init.sh | sh
 
 # OR
-# wget -O - https://raw.githubusercontent.com/takashiki/my-server/master/init.sh | sh
+# wget -O - https://raw.fastgit.org/takashiki/my-server/master/init.sh | sh
 ```

@@ -43,8 +43,8 @@ if [ ! -d ~/.ssh ]; then
 	chmod 700 ~/.ssh
 fi
 
-if [ ! -z $PUB_KEY ] && [ -f $PUB_KEY ]; then
-	cat $PUB_KEY >> ~/.ssh/authorized_keys
+if [ ! -z $PUB_KEY ]; then
+	echo $PUB_KEY >> ~/.ssh/authorized_keys
 	chmod 600 ~/.ssh/authorized_keys
 fi
 
