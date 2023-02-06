@@ -3,12 +3,7 @@
 # load config
 
 if [ -f .env ]; then
-	unamestr=$(uname)
-	if [ "$unamestr" = 'Linux' ]; then
-		export $(grep -v '^#' .env | xargs -d '\n')
-	elif [ "$unamestr" = 'FreeBSD' ] || [ "$unamestr" = 'Darwin' ]; then
-		export $(grep -v '^#' .env | xargs -0)
-	fi
+	export $(cat .env | sed 's/#.*//g' | xargs)
 fi
 
 # install softwares
@@ -69,11 +64,12 @@ apt install -y \
 	gnupg-agent \
 	software-properties-common
 
-curl -fsSL https://download.docker.com/linux/$ID/gpg | apt-key add -
+#curl -fsSL https://download.docker.com/linux/$ID/gpg | apt-key add -
+curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/$ID/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 
 add-apt-repository \
-	"deb [arch=amd64] https://download.docker.com/linux/$ID \
+	"deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/$ID \
 	$(lsb_release -cs) \
 	stable"
 
