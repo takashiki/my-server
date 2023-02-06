@@ -3,7 +3,12 @@
 # load config
 
 if [ -f .env ]; then
-	source .env
+	unamestr=$(uname)
+	if [ "$unamestr" = 'Linux' ]; then
+		export $(grep -v '^#' .env | xargs -d '\n')
+	elif [ "$unamestr" = 'FreeBSD' ] || [ "$unamestr" = 'Darwin' ]; then
+		export $(grep -v '^#' .env | xargs -0)
+	fi
 fi
 
 # install softwares
@@ -43,8 +48,8 @@ if [ ! -d ~/.ssh ]; then
 	chmod 700 ~/.ssh
 fi
 
-if [ ! -z $PUB_KEY ]; then
-	echo $PUB_KEY >> ~/.ssh/authorized_keys
+if [ ! -z $PUB_KEY ] && [ -f $PUB_KEY ]; then
+	cat $PUB_KEY >> ~/.ssh/authorized_keys
 	chmod 600 ~/.ssh/authorized_keys
 fi
 
