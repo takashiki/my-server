@@ -1,26 +1,29 @@
 #!/bin/bash
 
-# load config
-
-if [ -f .env ]; then
-	export $(cat .env | sed 's/#.*//g' | xargs)
-fi
-
 # install softwares
 
 export DEBIAN_FRONTEND=noninteractive
 apt update
 apt -qy -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade
-apt install -y vim git htop lrzsz autojump
+apt install -y curl vim git htop lrzsz autojump
 
-if [ -z $GIT_USER ] && [ -z $GIT_EMAIL ]; then
+# load config
+
+if [ ! -f .env ]; then
+	curl https://raw.fastgit.org/takashiki/my-server/master/.env.example -o .env
+	curl https://raw.fastgit.org/takashiki/my-server/master/id_rsa.pub -o id_rsa.pub
+fi
+
+export $(cat .env | sed 's/#.*//g' | xargs)
+
+# ===
+# basic config & vim
+
+if [ -n $GIT_USER ] && [ -n $GIT_EMAIL ]; then
 	git config --global user.name $GIT_USER
 	git config --global user.email $GIT_EMAIL
 fi
 git config --global credential.helper store
-
-# ===
-# basic config & vim
 
 git clone https://gitclone.com/github.com/takashiki/my-server.git ~/.server
 echo "for alias in ~/.server/aliases/*
@@ -34,7 +37,7 @@ echo "source ~/.vim/my.vim" > ~/.vimrc
 # ===
 # config ssh port and key
 
-if [ ! -z $SSH_PORT ]; then
+if [ -n $SSH_PORT ]; then
 	echo "Port $SSH_PORT" >> /etc/ssh/sshd_config
 fi
 
@@ -43,8 +46,8 @@ if [ ! -d ~/.ssh ]; then
 	chmod 700 ~/.ssh
 fi
 
-if [ ! -z $PUB_KEY ] && [ -f $PUB_KEY ]; then
-	cat $PUB_KEY >> ~/.ssh/authorized_keys
+if [ -n $PUB_KEY_PATH ] && [ -f $PUB_KEY_PATH ]; then
+	cat $PUB_KEY_PATH >> ~/.ssh/authorized_keys
 	chmod 600 ~/.ssh/authorized_keys
 fi
 
@@ -64,19 +67,18 @@ apt install -y \
 	gnupg-agent \
 	software-properties-common
 
-#curl -fsSL https://download.docker.com/linux/$ID/gpg | apt-key add -
-curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/$ID/gpg | sudo apt-key add -
+curl -fsSL http://mirrors.tencentyun.com/docker-ce/linux/$ID/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 
 add-apt-repository \
-	"deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/$ID \
+	"deb [arch=amd64] http://mirrors.tencentyun.com/docker-ce/linux/$ID \
 	$(lsb_release -cs) \
 	stable"
 
 apt update
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose
 
-if [ ! -z $DOCKER_MIRROR ]; then
+if [ -n $DOCKER_MIRROR ]; then
 	curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s $DOCKER_MIRROR
 	service docker restart
 fi
